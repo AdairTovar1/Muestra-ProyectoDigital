@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEWS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            serif:   ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            ui:      ['"Jost"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --black: #0a0a0a;
+      --gray:  #999;
+      --rule:  #e0e0e0;
+    }
+
+    body {
+      background: #fff;
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Page entrance */
+    body { animation: rise .5s ease both; }
+    @keyframes rise {
+      from { opacity:0; transform:translateY(6px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* Ticker */
+    @keyframes tick { from{transform:translateX(100%)} to{transform:translateX(-100%)} }
+    .ticker-text { display:inline-block; white-space:nowrap; animation: tick 32s linear infinite; }
+
+    /* Hover headlines */
+    .card:hover .hl { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+    /* Image block */
+    .img-block {
+      background: #f2f2f2;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-block span {
+      font-family: 'Jost', sans-serif;
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #bbb;
+    }
+
+    /* Label */
+    .lbl {
+      font-family: 'Jost', sans-serif;
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* Byline */
+    .by {
+      font-family: 'Jost', sans-serif;
+      font-size: .65rem;
+      font-weight: 300;
+      color: var(--gray);
+      letter-spacing: .04em;
+    }
+
+    /* Nav links */
+    nav a { transition: opacity .15s; }
+    nav a:hover { opacity: .45; }
+
+    /* Number */
+    .num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      color: #e8e8e8;
+      transition: color .2s;
+    }
+    .rank-item:hover .num { color: #0a0a0a; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── TICKER ─── -->
+  <div style="height:28px; border-bottom:1px solid var(--rule); overflow:hidden; display:flex; align-items:center; gap:0;">
+    <span class="lbl" style="padding:0 16px; border-right:1px solid var(--rule); white-space:nowrap; color:#0a0a0a;">EN VIVO</span>
+    <div style="flex:1; overflow:hidden; position:relative; height:28px; display:flex; align-items:center;">
+      <span class="ticker-text" style="font-family:'Jost',sans-serif; font-size:.7rem; font-weight:300; color:#555; letter-spacing:.03em;">
+        &nbsp;&nbsp;&nbsp; Cumbre climática alcanza acuerdo histórico en reducción de emisiones &nbsp;·&nbsp; Banco central anuncia nueva política de tasas &nbsp;·&nbsp; Científicos identifican tratamiento para enfermedad rara &nbsp;·&nbsp; Economía regional creció 3.4% en el último trimestre &nbsp;·&nbsp; Festival de Cine abre convocatoria 2025 &nbsp;·&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <!-- ─── NAV ─── -->
+  <div style="border-bottom:1px solid var(--rule);">
+    <div style="max-width:1280px; margin:0 auto; padding:0 32px; display:flex; justify-content:space-between; align-items:center; height:40px;">
+      <nav style="display:flex; gap:28px;">
+        <a href="#" class="lbl" style="color:var(--black);">Política</a>
+        <a href="#" class="lbl" style="color:var(--black);">Economía</a>
+        <a href="#" class="lbl" style="color:var(--black);">Cultura</a>
+        <a href="#" class="lbl" style="color:var(--black);">Ciencia</a>
+        <a href="#" class="lbl" style="color:var(--black);">Mundo</a>
+      </nav>
+      <nav style="display:flex; gap:28px;">
+        <a href="#" class="lbl" style="color:var(--black);">Opinión</a>
+        <a href="#" class="lbl" style="color:var(--black);">Deportes</a>
+        <a href="#" class="lbl" style="color:var(--black);">Tecnología</a>
+        <a href="#" class="lbl" style="color:var(--black);">Suscribirse</a>
+      </nav>
+    </div>
+  </div>
+
+  <div style="max-width:1280px; margin:0 auto; padding:0 32px;">
+
+    <!-- ─── MASTHEAD ─── -->
+    <header style="padding:48px 0 0; text-align:center; border-bottom:1px solid var(--black); padding-bottom:16px;">
+      <div class="by" style="margin-bottom:10px; letter-spacing:.3em;">LUNES, 30 DE MARZO DE 2026</div>
+      <h1 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(6rem,16vw,13rem); line-height:.88; letter-spacing:.06em; color:#0a0a0a;">NEWS</h1>
+      <div class="by" style="margin-top:10px; letter-spacing:.3em;">PERIODISMO INDEPENDIENTE · FUNDADO 2025</div>
+    </header>
+
+    <!-- ─── HERO GRID ─── -->
+    <section style="display:grid; grid-template-columns:1fr 2fr 1fr; border-bottom:1px solid var(--rule); padding:40px 0;">
+
+      <!-- Left stories -->
+      <div style="border-right:1px solid var(--rule); padding-right:32px; display:flex; flex-direction:column; gap:28px;">
+
+        <article class="card" style="cursor:pointer;">
+          <div class="lbl" style="margin-bottom:8px;">Política</div>
+          <h2 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:600; line-height:1.25; margin-bottom:8px;">El parlamento aprueba la mayor reforma fiscal en dos décadas</h2>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.9rem; font-weight:300; line-height:1.65; color:#555;">Un acuerdo bipartidista transforma la estructura tributaria del país tras meses de negociación.</p>
+          <div class="by" style="margin-top:10px;">Valentina Herrera · 2 h</div>
+        </article>
+
+        <div style="border-top:1px solid var(--rule);"></div>
+
+        <article class="card" style="cursor:pointer;">
+          <div class="lbl" style="margin-bottom:8px;">Internacional</div>
+          <h2 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:600; line-height:1.25; margin-bottom:8px;">Las negociaciones de paz avanzan en terreno frágil</h2>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.9rem; font-weight:300; line-height:1.65; color:#555;">Delegados de quince naciones se reúnen en Ginebra buscando un marco de acuerdo duradero.</p>
+          <div class="by" style="margin-top:10px;">Marcos Leal · 4 h</div>
+        </article>
+
+        <div style="border-top:1px solid var(--rule);"></div>
+
+        <article class="card" style="cursor:pointer;">
+          <div class="lbl" style="margin-bottom:6px;">Economía</div>
+          <h2 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; line-height:1.3;">Los mercados responden con cautela al nuevo dato de empleo</h2>
+          <div class="by" style="margin-top:8px;">Sofía Aranda · 6 h</div>
+        </article>
+
+      </div>
+
+      <!-- Center hero -->
+      <div style="padding:0 40px; border-right:1px solid var(--rule);">
+        <div class="img-block" style="width:100%; aspect-ratio:3/2; margin-bottom:24px;">
+          <span>Imagen principal</span>
+        </div>
+        <div class="lbl" style="margin-bottom:12px;">Investigación especial</div>
+        <h2 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.7rem,3vw,2.4rem); font-weight:600; line-height:1.15; margin-bottom:20px; cursor:pointer;">
+          La silenciosa transformación del agua: cómo la crisis hídrica redefine las ciudades del siglo XXI
+        </h2>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:300; line-height:1.75; color:#444; margin-bottom:20px;">
+          Durante décadas, la crisis del agua fue una preocupación periférica en los debates urbanos. Hoy, con más de cuarenta megaciudades enfrentando restricciones severas, el problema se instala en el centro de cada decisión de política pública e infraestructura.
+        </p>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div class="by">Catalina Montiel y Rodrigo Vega</div>
+          <div style="width:1px; height:10px; background:var(--rule);"></div>
+          <div class="lbl">18 min</div>
+        </div>
+      </div>
+
+      <!-- Right stories -->
+      <div style="padding-left:32px; display:flex; flex-direction:column; gap:28px;">
+
+        <article class="card" style="cursor:pointer;">
+          <div class="lbl" style="margin-bottom:8px;">Ciencia</div>
+          <h2 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:600; line-height:1.25; margin-bottom:8px;">Un estudio reconfigura la comprensión del sueño profundo</h2>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.9rem; font-weight:300; line-height:1.65; color:#555;">Investigadores en Basilea descubrieron mecanismos cerebrales que explican variaciones en el descanso humano.</p>
+          <div class="by" style="margin-top:10px;">Ana Luz Brennan · 3 h</div>
+        </article>
+
+        <div style="border-top:1px solid var(--rule);"></div>
+
+        <article class="card" style="cursor:pointer;">
+          <div class="lbl" style="margin-bottom:8px;">Arte & Cultura</div>
+          <h2 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:600; line-height:1.25; margin-bottom:8px;">La Bienal regresa con una propuesta que incomoda e ilumina</h2>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.9rem; font-weight:300; line-height:1.65; color:#555;">Esta edición abandona los formatos seguros para explorar la tensión entre memoria y olvido institucional.</p>
+          <div class="by" style="margin-top:10px;">Diego Canales · 5 h</div>
+        </article>
+
+        <div style="border-top:1px solid var(--rule);"></div>
+
+        <!-- Weather -->
+        <div style="border:1px solid var(--rule); padding:16px;">
+          <div class="lbl" style="margin-bottom:12px;">El tiempo</div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div>
+              <div style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; color:#0a0a0a;">24°</div>
+              <div class="by" style="margin-top:4px;">Ciudad de México</div>
+              <div class="by">Parcialmente nublado</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="by">Mín 16° / Máx 27°</div>
+              <div class="by">Humedad 58%</div>
+              <div class="by">Viento 12 km/h</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── 4-COLUMN STRIP ─── -->
+    <section style="border-bottom:1px solid var(--rule); padding:36px 0;">
+      <div class="lbl" style="text-align:center; margin-bottom:28px; letter-spacing:.3em;">Las noticias del día</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0;">
+
+        <article class="card" style="cursor:pointer; border-right:1px solid var(--rule); padding-right:28px;">
+          <div class="img-block" style="aspect-ratio:4/3; margin-bottom:16px; min-height:110px;"><span>Foto</span></div>
+          <div class="lbl" style="margin-bottom:8px;">Tecnología</div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; line-height:1.3; margin-bottom:8px;">La inteligencia artificial entra al salón de clases con nuevos dilemas</h3>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.85rem; font-weight:300; line-height:1.6; color:#555;">Educadores y familias enfrentan preguntas sin respuesta mientras las herramientas digitales rediseñan el aprendizaje.</p>
+          <div class="by" style="margin-top:10px;">Elena Ruiz</div>
+        </article>
+
+        <article class="card" style="cursor:pointer; border-right:1px solid var(--rule); padding:0 28px;">
+          <div class="img-block" style="aspect-ratio:4/3; margin-bottom:16px; min-height:110px;"><span>Foto</span></div>
+          <div class="lbl" style="margin-bottom:8px;">Sociedad</div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; line-height:1.3; margin-bottom:8px;">El regreso de los mercados locales como resistencia cultural</h3>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.85rem; font-weight:300; line-height:1.6; color:#555;">En barrios de América Latina, el trueque y los mercados de productores reviven formas de economía solidaria.</p>
+          <div class="by" style="margin-top:10px;">Camilo Torres</div>
+        </article>
+
+        <article class="card" style="cursor:pointer; border-right:1px solid var(--rule); padding:0 28px;">
+          <div class="img-block" style="aspect-ratio:4/3; margin-bottom:16px; min-height:110px;"><span>Foto</span></div>
+          <div class="lbl" style="margin-bottom:8px;">Deportes</div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; line-height:1.3; margin-bottom:8px;">Cómo un equipo pequeño desafió la lógica del fútbol moderno</h3>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.85rem; font-weight:300; line-height:1.6; color:#555;">Con presupuesto mínimo y datos sofisticados, el club logró su primera final continental en 60 años.</p>
+          <div class="by" style="margin-top:10px;">Tomás Espinoza</div>
+        </article>
+
+        <article class="card" style="cursor:pointer; padding-left:28px;">
+          <div class="img-block" style="aspect-ratio:4/3; margin-bottom:16px; min-height:110px;"><span>Foto</span></div>
+          <div class="lbl" style="margin-bottom:8px;">Medio Ambiente</div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; line-height:1.3; margin-bottom:8px;">Las ciudades esponja: arquitectura que absorbe el caos climático</h3>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.85rem; font-weight:300; line-height:1.6; color:#555;">Una nueva generación de urbanistas diseña infraestructura verde que convierte las inundaciones en oportunidades.</p>
+          <div class="by" style="margin-top:10px;">Isabel Marín</div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ─── OPINION + LONG READ + SIDEBAR ─── -->
+    <section style="display:grid; grid-template-columns:1fr 1.6fr 1fr; border-bottom:1px solid var(--rule); padding:40px 0; gap:0;">
+
+      <!-- Opinion -->
+      <div style="border-right:1px solid var(--rule); padding-right:32px;">
+        <div class="lbl" style="margin-bottom:24px; letter-spacing:.25em;">Opinión</div>
+
+        <article class="card" style="cursor:pointer; margin-bottom:24px;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <div style="width:36px; height:36px; border:1px solid var(--rule); display:flex; align-items:center; justify-content:center; font-family:'Jost',sans-serif; font-size:.65rem; font-weight:500; flex-shrink:0;">CM</div>
+            <div>
+              <div style="font-family:'Jost',sans-serif; font-size:.72rem; font-weight:500;">Carlos Méndez</div>
+              <div class="by">Analista político</div>
+            </div>
+          </div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-style:italic; font-weight:600; line-height:1.3; margin-bottom:8px;">El silencio de la oposición no es estrategia: es fracaso</h3>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.88rem; font-weight:300; line-height:1.65; color:#555;">Cuando un partido elige el mutismo frente a decisiones que moldean el país, abdica su responsabilidad más elemental.</p>
+        </article>
+
+        <div style="border-top:1px solid var(--rule); margin:0 0 24px;"></div>
+
+        <article class="card" style="cursor:pointer; margin-bottom:24px;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <div style="width:36px; height:36px; border:1px solid var(--rule); display:flex; align-items:center; justify-content:center; font-family:'Jost',sans-serif; font-size:.65rem; font-weight:500; flex-shrink:0;">LV</div>
+            <div>
+              <div style="font-family:'Jost',sans-serif; font-size:.72rem; font-weight:500;">Lucía Varela</div>
+              <div class="by">Economista</div>
+            </div>
+          </div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-style:italic; font-weight:600; line-height:1.3; margin-bottom:8px;">Por qué la inflación no es solo un número</h3>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:.88rem; font-weight:300; line-height:1.65; color:#555;">Detrás de cada décima porcentual hay decisiones humanas y una visión del mundo que rara vez se explicita.</p>
+        </article>
+
+        <div style="border-top:1px solid var(--rule); margin:0 0 24px;"></div>
+
+        <article class="card" style="cursor:pointer;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <div style="width:36px; height:36px; border:1px solid var(--rule); display:flex; align-items:center; justify-content:center; font-family:'Jost',sans-serif; font-size:.65rem; font-weight:500; flex-shrink:0;">PG</div>
+            <div>
+              <div style="font-family:'Jost',sans-serif; font-size:.72rem; font-weight:500;">Pablo Guerrero</div>
+              <div class="by">Historiador</div>
+            </div>
+          </div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-style:italic; font-weight:600; line-height:1.3;">El pasado que fingimos olvidar</h3>
+        </article>
+      </div>
+
+      <!-- Long read feature -->
+      <div style="padding:0 40px; border-right:1px solid var(--rule);">
+        <div class="lbl" style="margin-bottom:20px; letter-spacing:.25em;">Lectura larga</div>
+        <div class="img-block" style="width:100%; aspect-ratio:16/7; margin-bottom:24px; min-height:160px;">
+          <span>Fotografía</span>
+        </div>
+        <div class="lbl" style="margin-bottom:10px;">Perfil</div>
+        <h2 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:600; line-height:1.15; margin-bottom:16px; cursor:pointer;">
+          La arquitecta que construye para quienes nadie construye
+        </h2>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:300; line-height:1.8; color:#444; margin-bottom:24px;">
+          Amara Diallo lleva quince años diseñando vivienda digna en zonas de conflicto. Su método combina materiales locales, participación comunitaria y una visión radical: la arquitectura como acto político que transforma no solo el espacio, sino la vida de quienes lo habitan.
+        </p>
+
+        <div style="border-top:1px solid var(--rule); padding-top:20px; margin-bottom:28px;">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div class="by">Por Nadia Okonkwo</div>
+            <div class="lbl">12 min de lectura</div>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--rule); padding-top:20px;">
+          <div class="lbl" style="margin-bottom:12px;">También en lecturas largas</div>
+          <article class="card" style="cursor:pointer;">
+            <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; line-height:1.3; margin-bottom:6px;">La tiranía de la productividad: cuando optimizar la vida destruye la existencia</h3>
+            <div class="by">Rafael Suárez · 9 min</div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Most read + Newsletter -->
+      <div style="padding-left:32px; display:flex; flex-direction:column; gap:32px;">
+
+        <!-- Most read -->
+        <div>
+          <div class="lbl" style="margin-bottom:20px; letter-spacing:.25em;">Lo más leído</div>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+
+            <div class="rank-item" style="display:flex; gap:12px; align-items:flex-start; cursor:pointer;">
+              <span class="num">1</span>
+              <p style="font-family:'Cormorant Garamond',serif; font-size:.95rem; font-weight:600; line-height:1.3; padding-top:8px;">La crisis del agua llega a las grandes capitales</p>
+            </div>
+
+            <div style="border-top:1px solid var(--rule);"></div>
+
+            <div class="rank-item" style="display:flex; gap:12px; align-items:flex-start; cursor:pointer;">
+              <span class="num">2</span>
+              <p style="font-family:'Cormorant Garamond',serif; font-size:.95rem; font-weight:600; line-height:1.3; padding-top:8px;">Reforma fiscal: qué cambia y para quién</p>
+            </div>
+
+            <div style="border-top:1px solid var(--rule);"></div>
+
+            <div class="rank-item" style="display:flex; gap:12px; align-items:flex-start; cursor:pointer;">
+              <span class="num">3</span>
+              <p style="font-family:'Cormorant Garamond',serif; font-size:.95rem; font-weight:600; line-height:1.3; padding-top:8px;">El enigma del sueño profundo tiene nueva explicación científica</p>
+            </div>
+
+            <div style="border-top:1px solid var(--rule);"></div>
+
+            <div class="rank-item" style="display:flex; gap:12px; align-items:flex-start; cursor:pointer;">
+              <span class="num">4</span>
+              <p style="font-family:'Cormorant Garamond',serif; font-size:.95rem; font-weight:600; line-height:1.3; padding-top:8px;">La arquitecta que construye para quienes nadie construye</p>
+            </div>
+
+            <div style="border-top:1px solid var(--rule);"></div>
+
+            <div class="rank-item" style="display:flex; gap:12px; align-items:flex-start; cursor:pointer;">
+              <span class="num">5</span>
+              <p style="font-family:'Cormorant Garamond',serif; font-size:.95rem; font-weight:600; line-height:1.3; padding-top:8px;">El equipo que desafió la lógica del fútbol moderno</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div style="border:1px solid var(--rule); padding:24px;">
+          <div class="lbl" style="margin-bottom:10px; letter-spacing:.25em;">Boletín diario</div>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; line-height:1.5; margin-bottom:16px; color:#333;">Las cinco noticias esenciales, cada mañana.</p>
+          <input type="email" placeholder="tu@correo.com" style="width:100%; border:none; border-bottom:1px solid #0a0a0a; padding:8px 0; font-family:'Jost',sans-serif; font-size:.75rem; font-weight:300; outline:none; background:transparent; color:#0a0a0a; margin-bottom:16px; display:block;" />
+          <button style="width:100%; background:#0a0a0a; color:#fff; padding:10px; font-family:'Jost',sans-serif; font-size:.65rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; border:none; cursor:pointer; transition:opacity .2s;" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">Suscribirme</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── CULTURE STRIP ─── -->
+    <section style="padding:36px 0; border-bottom:1px solid var(--rule);">
+      <div class="lbl" style="text-align:center; margin-bottom:28px; letter-spacing:.3em;">Arte · Libros · Cine · Música</div>
+      <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:0;">
+
+        <article class="card" style="cursor:pointer; border-right:1px solid var(--rule); padding-right:24px;">
+          <div class="lbl" style="margin-bottom:8px;">Libros</div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; line-height:1.35; margin-bottom:8px;">La nueva novela de Ávila desafía al lector con laberíntica belleza</h3>
+          <div class="by">★★★★★</div>
+        </article>
+
+        <article class="card" style="cursor:pointer; border-right:1px solid var(--rule); padding:0 24px;">
+          <div class="lbl" style="margin-bottom:8px;">Cine</div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; line-height:1.35; margin-bottom:8px;">"Marea baja" es el documental que México necesitaba ahora mismo</h3>
+          <div class="by">★★★★☆</div>
+        </article>
+
+        <article class="card" style="cursor:pointer; border-right:1px solid var(--rule); padding:0 24px;">
+          <div class="lbl" style="margin-bottom:8px;">Música</div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; line-height:1.35; margin-bottom:8px;">El álbum que reconcilia el jazz latinoamericano con la electrónica</h3>
+          <div class="by">★★★★★</div>
+        </article>
+
+        <article class="card" style="cursor:pointer; border-right:1px solid var(--rule); padding:0 24px;">
+          <div class="lbl" style="margin-bottom:8px;">Teatro</div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; line-height:1.35; margin-bottom:8px;">Una puesta en escena que convierte el dolor en danza colectiva</h3>
+          <div class="by">★★★★☆</div>
+        </article>
+
+        <article class="card" style="cursor:pointer; padding-left:24px;">
+          <div class="lbl" style="margin-bottom:8px;">Exposición</div>
+          <h3 class="hl" style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; line-height:1.35; margin-bottom:8px;">Fotografía que captura 40 años de transformación urbana</h3>
+          <div class="by">Hasta el 15 de abril</div>
+        </article>
+
+      </div>
+    </section>
+
+  </div><!-- end max-w -->
+
+  <!-- ─── FOOTER ─── -->
+  <footer style="border-top:1px solid #0a0a0a; margin-top:0;">
+    <div style="max-width:1280px; margin:0 auto; padding:40px 32px;">
+      <div style="display:grid; grid-template-columns:auto 1fr 1fr 1fr auto; gap:48px; align-items:start; margin-bottom:32px;">
+
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; letter-spacing:.06em;">NEWS</div>
+          <div class="by" style="margin-top:6px;">Periodismo independiente</div>
+        </div>
+
+        <div>
+          <div class="lbl" style="margin-bottom:12px;">Secciones</div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Política</a>
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Economía</a>
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Internacional</a>
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Ciencia</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="lbl" style="margin-bottom:12px;">Cultura</div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Arte</a>
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Cine</a>
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Literatura</a>
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Música</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="lbl" style="margin-bottom:12px;">Acerca de</div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Quiénes somos</a>
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Código ético</a>
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Publicidad</a>
+            <a href="#" class="by" style="color:var(--black); text-decoration:none; transition:opacity .15s;" onmouseover="this.style.opacity='.5'" onmouseout="this.style.opacity='1'">Contacto</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="lbl" style="margin-bottom:12px;">Suscripción</div>
+          <p class="by" style="margin-bottom:12px; max-width:160px; line-height:1.6;">Acceso ilimitado desde $99/mes.</p>
+          <button style="border:1px solid #0a0a0a; background:transparent; padding:8px 16px; font-family:'Jost',sans-serif; font-size:.6rem; font-weight:500; letter-spacing:.15em; text-transform:uppercase; cursor:pointer; transition:all .2s;" onmouseover="this.style.background='#0a0a0a';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#0a0a0a'">Suscribirme</button>
+        </div>
+
+      </div>
+
+      <div style="border-top:1px solid var(--rule); padding-top:20px; display:flex; justify-content:space-between; align-items:center;">
+        <div class="by">© 2026 NEWS. Todos los derechos reservados.</div>
+        <div style="display:flex; gap:20px;">
+          <a href="#" class="by" style="color:var(--black); text-decoration:none;">Privacidad</a>
+          <a href="#" class="by" style="color:var(--black); text-decoration:none;">Términos</a>
+          <a href="#" class="by" style="color:var(--black); text-decoration:none;">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
