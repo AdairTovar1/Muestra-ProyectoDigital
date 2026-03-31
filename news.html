@@ -97,6 +97,66 @@
       transition: color .2s;
     }
     .rank-item:hover .num { color: #0a0a0a; }
+
+    /* ─── RESPONSIVE LAYOUT CLASSES ─── */
+    .hero-grid   { display:grid; grid-template-columns:1fr 2fr 1fr; }
+    .four-col    { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+    .three-col   { display:grid; grid-template-columns:1fr 1.6fr 1fr; gap:0; }
+    .five-col    { display:grid; grid-template-columns:repeat(5,1fr); gap:0; }
+    .footer-grid { display:grid; grid-template-columns:auto 1fr 1fr 1fr auto; gap:48px; align-items:start; margin-bottom:32px; }
+
+    /* Hamburger — hidden on desktop */
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
+    .nav-hamburger span { display:block; width:20px; height:1.5px; background:var(--black); transition:all .2s; }
+    .nav-mobile { display:none; border-bottom:1px solid var(--rule); padding:12px 24px 16px; flex-direction:column; gap:14px; }
+    .nav-mobile.open { display:flex; }
+
+    /* ── Tablet ≤ 1024px ── */
+    @media (max-width:1024px) {
+      .hero-grid { grid-template-columns:1fr 1fr; }
+      .hero-right { grid-column:1 / -1; padding-left:0 !important; padding-top:28px; border-top:1px solid var(--rule); border-left:none !important; display:grid !important; grid-template-columns:1fr 1fr; gap:24px; }
+      .hero-right > div[style*="border-top"] { display:none; } /* hide separator divs */
+      .five-col  { grid-template-columns:repeat(3,1fr); }
+      .footer-grid { grid-template-columns:1fr 1fr; gap:32px; }
+    }
+
+    /* ── Mobile ≤ 768px ── */
+    @media (max-width:768px) {
+      .nav-hamburger { display:flex; }
+      .nav-links     { display:none !important; }
+
+      .hero-grid { grid-template-columns:1fr; }
+      .hero-left  { border-right:none !important; padding-right:0 !important; border-bottom:1px solid var(--rule); padding-bottom:28px; }
+      .hero-center { border-right:none !important; padding:28px 0 0 !important; }
+      .hero-right  { grid-column:1 !important; grid-template-columns:1fr !important; padding-left:0 !important; }
+
+      .four-col { grid-template-columns:1fr 1fr; }
+      .four-col > article { border-right:none !important; padding:0 0 24px !important; border-bottom:1px solid var(--rule); }
+      .four-col > article:last-child { border-bottom:none; padding-bottom:0 !important; }
+
+      .three-col { grid-template-columns:1fr; }
+      .three-col > div { border-right:none !important; padding-right:0 !important; padding-left:0 !important; border-top:1px solid var(--rule); padding-top:32px; }
+      .three-col > div:first-child { border-top:none; padding-top:0; }
+
+      .five-col { grid-template-columns:1fr 1fr; }
+      .five-col > article { border-right:none !important; padding:0 0 20px !important; border-bottom:1px solid var(--rule); }
+      .five-col > article:last-child { border-bottom:none; padding-bottom:0 !important; }
+
+      .footer-grid { grid-template-columns:1fr 1fr; gap:28px; }
+    }
+
+    /* ── Small mobile ≤ 480px ── */
+    @media (max-width:480px) {
+      .four-col   { grid-template-columns:1fr; }
+      .five-col   { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr; }
+      .footer-bottom { flex-direction:column !important; gap:12px; align-items:flex-start !important; }
+    }
+
+    /* ── General padding on small screens ── */
+    @media (max-width:640px) {
+      .px-outer { padding-left:16px !important; padding-right:16px !important; }
+    }
   </style>
 </head>
 
@@ -114,24 +174,40 @@
 
   <!-- ─── NAV ─── -->
   <div style="border-bottom:1px solid var(--rule);">
-    <div style="max-width:1280px; margin:0 auto; padding:0 32px; display:flex; justify-content:space-between; align-items:center; height:40px;">
-      <nav style="display:flex; gap:28px;">
+    <div class="px-outer" style="max-width:1280px; margin:0 auto; padding:0 32px; display:flex; justify-content:space-between; align-items:center; height:40px;">
+      <nav class="nav-links" style="display:flex; gap:28px;">
         <a href="#" class="lbl" style="color:var(--black);">Política</a>
         <a href="#" class="lbl" style="color:var(--black);">Economía</a>
         <a href="#" class="lbl" style="color:var(--black);">Cultura</a>
         <a href="#" class="lbl" style="color:var(--black);">Ciencia</a>
         <a href="#" class="lbl" style="color:var(--black);">Mundo</a>
       </nav>
-      <nav style="display:flex; gap:28px;">
+      <nav class="nav-links" style="display:flex; gap:28px;">
         <a href="#" class="lbl" style="color:var(--black);">Opinión</a>
         <a href="#" class="lbl" style="color:var(--black);">Deportes</a>
         <a href="#" class="lbl" style="color:var(--black);">Tecnología</a>
         <a href="#" class="lbl" style="color:var(--black);">Suscribirse</a>
       </nav>
+      <!-- Hamburger button (visible on mobile) -->
+      <button class="nav-hamburger" onclick="document.getElementById('mobileNav').classList.toggle('open')" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+    <!-- Mobile nav dropdown -->
+    <nav id="mobileNav" class="nav-mobile">
+      <a href="#" class="lbl" style="color:var(--black);">Política</a>
+      <a href="#" class="lbl" style="color:var(--black);">Economía</a>
+      <a href="#" class="lbl" style="color:var(--black);">Cultura</a>
+      <a href="#" class="lbl" style="color:var(--black);">Ciencia</a>
+      <a href="#" class="lbl" style="color:var(--black);">Mundo</a>
+      <a href="#" class="lbl" style="color:var(--black);">Opinión</a>
+      <a href="#" class="lbl" style="color:var(--black);">Deportes</a>
+      <a href="#" class="lbl" style="color:var(--black);">Tecnología</a>
+      <a href="#" class="lbl" style="color:var(--black);">Suscribirse</a>
+    </nav>
   </div>
 
-  <div style="max-width:1280px; margin:0 auto; padding:0 32px;">
+  <div class="px-outer" style="max-width:1280px; margin:0 auto; padding:0 32px;">
 
     <!-- ─── MASTHEAD ─── -->
     <header style="padding:48px 0 0; text-align:center; border-bottom:1px solid var(--black); padding-bottom:16px;">
@@ -141,10 +217,10 @@
     </header>
 
     <!-- ─── HERO GRID ─── -->
-    <section style="display:grid; grid-template-columns:1fr 2fr 1fr; border-bottom:1px solid var(--rule); padding:40px 0;">
+    <section class="hero-grid" style="border-bottom:1px solid var(--rule); padding:40px 0;">
 
       <!-- Left stories -->
-      <div style="border-right:1px solid var(--rule); padding-right:32px; display:flex; flex-direction:column; gap:28px;">
+      <div class="hero-left" style="border-right:1px solid var(--rule); padding-right:32px; display:flex; flex-direction:column; gap:28px;">
 
         <article class="card" style="cursor:pointer;">
           <div class="lbl" style="margin-bottom:8px;">Política</div>
@@ -173,7 +249,7 @@
       </div>
 
       <!-- Center hero -->
-      <div style="padding:0 40px; border-right:1px solid var(--rule);">
+      <div class="hero-center" style="padding:0 40px; border-right:1px solid var(--rule);">
         <div class="img-block" style="width:100%; aspect-ratio:3/2; margin-bottom:24px;">
           <span>Imagen principal</span>
         </div>
@@ -192,7 +268,7 @@
       </div>
 
       <!-- Right stories -->
-      <div style="padding-left:32px; display:flex; flex-direction:column; gap:28px;">
+      <div class="hero-right" style="padding-left:32px; display:flex; flex-direction:column; gap:28px;">
 
         <article class="card" style="cursor:pointer;">
           <div class="lbl" style="margin-bottom:8px;">Ciencia</div>
@@ -235,7 +311,7 @@
     <!-- ─── 4-COLUMN STRIP ─── -->
     <section style="border-bottom:1px solid var(--rule); padding:36px 0;">
       <div class="lbl" style="text-align:center; margin-bottom:28px; letter-spacing:.3em;">Las noticias del día</div>
-      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0;">
+      <div class="four-col">
 
         <article class="card" style="cursor:pointer; border-right:1px solid var(--rule); padding-right:28px;">
           <div class="img-block" style="aspect-ratio:4/3; margin-bottom:16px; min-height:110px;"><span>Foto</span></div>
@@ -273,7 +349,7 @@
     </section>
 
     <!-- ─── OPINION + LONG READ + SIDEBAR ─── -->
-    <section style="display:grid; grid-template-columns:1fr 1.6fr 1fr; border-bottom:1px solid var(--rule); padding:40px 0; gap:0;">
+    <section class="three-col" style="border-bottom:1px solid var(--rule); padding:40px 0;">
 
       <!-- Opinion -->
       <div style="border-right:1px solid var(--rule); padding-right:32px;">
@@ -406,7 +482,7 @@
     <!-- ─── CULTURE STRIP ─── -->
     <section style="padding:36px 0; border-bottom:1px solid var(--rule);">
       <div class="lbl" style="text-align:center; margin-bottom:28px; letter-spacing:.3em;">Arte · Libros · Cine · Música</div>
-      <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:0;">
+      <div class="five-col">
 
         <article class="card" style="cursor:pointer; border-right:1px solid var(--rule); padding-right:24px;">
           <div class="lbl" style="margin-bottom:8px;">Libros</div>
@@ -445,8 +521,8 @@
 
   <!-- ─── FOOTER ─── -->
   <footer style="border-top:1px solid #0a0a0a; margin-top:0;">
-    <div style="max-width:1280px; margin:0 auto; padding:40px 32px;">
-      <div style="display:grid; grid-template-columns:auto 1fr 1fr 1fr auto; gap:48px; align-items:start; margin-bottom:32px;">
+    <div class="px-outer" style="max-width:1280px; margin:0 auto; padding:40px 32px;">
+      <div class="footer-grid">
 
         <div>
           <div style="font-family:'Bebas Neue',sans-serif; font-size:3rem; line-height:1; letter-spacing:.06em;">NEWS</div>
@@ -491,7 +567,7 @@
 
       </div>
 
-      <div style="border-top:1px solid var(--rule); padding-top:20px; display:flex; justify-content:space-between; align-items:center;">
+      <div class="footer-bottom" style="border-top:1px solid var(--rule); padding-top:20px; display:flex; justify-content:space-between; align-items:center;">
         <div class="by">© 2026 NEWS. Todos los derechos reservados.</div>
         <div style="display:flex; gap:20px;">
           <a href="#" class="by" style="color:var(--black); text-decoration:none;">Privacidad</a>
